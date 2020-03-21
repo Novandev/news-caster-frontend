@@ -12,7 +12,7 @@ class Login extends Component {
 
 
     this.state = {
-        email: '',
+        username: '',
         password: '',
         submitted: false
     };
@@ -30,23 +30,23 @@ handleSubmit(e) {
     e.preventDefault();
 
     this.setState({ submitted: true });
-    const { email, password } = this.state;
+    const { username, password } = this.state;
     const { dispatch } = this.props;
-    if (email && password) {
-        dispatch(userActions.login(email, password));
+    if (username && password) {
+        dispatch(userActions.login(username, password));
     }
 }
 
 render() {
     const { loggingIn } = this.props;
-    const { email, password, submitted } = this.state;
+    const { username, password, submitted } = this.state;
 
     return (
         <form name="form" onSubmit={this.handleSubmit}>
-            <label htmlFor="email">Email</label>
-            <input type="text"  name="email" value={email} onChange={this.handleChange} />
-              {submitted && !email &&
-                  <div>Email is required</div>
+            <label htmlFor="username">Username</label>
+            <input type="text"  name="username" value={username} onChange={this.handleChange} />
+              {submitted && !username &&
+                  <div>Username is required</div>
               }
 
 

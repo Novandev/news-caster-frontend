@@ -9,40 +9,44 @@ export const userService = {
 };
 
 function signUp(email,username, password) {
-    let data ={"user":{"email":email,"username":username, "password":password}}
+    let data ={"email":email,"username":username, "password":password}
     let signupHeaders: {"Content-Type": "application/json"}
 
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-    return axios.post("http://127.0.0.1:8000/api/v1/users/", data,{signupHeaders})
+    return axios.post("http://127.0.0.1:8080/api/v1.0/auth/register", data,{signupHeaders})
         .then(result => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            let {username,token} =result.data.user;
-            let user ={
-                "username": username,
-                "token":token
+            let {user,token} =result.data;
+            let {email, userName} = user
+            let newUser ={
+                "username": userName,
+                "token":token,
+                "email":email
             }
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(newUser));
 
-            return user;
+            return newUser;
         });
 }
 
-function login(email, password) {
-    let data ={"user":{"email":email, "password":password}}
+function login(username, password) {
+    let data ={"username":username, "password":password}
     let headers: {"Content-Type": "application/json"}
 
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-    return axios.post("http://127.0.0.1:8000/api/v1/users/login/", data,{headers})
+    return axios.post("http://127.0.0.1:8080/api/v1.0/auth/login", data,{headers})
         .then(result => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            let {username,token} =result.data.user;
-            let user ={
-                "username": username,
-                "token":token
+            let {user,token} =result.data;
+            let {email, userName} = user
+            let validUser ={
+                "username": userName,
+                "token":token,
+                "email":email
             }
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(validUser));
 
-            return user;
+            return validUser;
         });
 }
 
