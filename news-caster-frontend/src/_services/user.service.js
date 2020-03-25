@@ -58,18 +58,17 @@ function logout() {
 function getUserProfile() {
 
     let token = JSON.parse(localStorage.getItem('user'))['token'];
-    let tokenString =`Token ${token}`
+    let tokenString =`Bearer ${token}`
     let headers = {
         "Content-Type": "application/json",
         "Authorization": tokenString
     }
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-    return axios.get("http://127.0.0.1:8000/api/v1/profile",{headers})
+    return axios.get("http://127.0.0.1:8080/api/v1.0/auth/check",{headers})
         .then(result => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             let userProfile = result.data.user;
             // localStorage.setItem('user', JSON.stringify(user));
-            console.log(userProfile)
             return userProfile;
         });
 }

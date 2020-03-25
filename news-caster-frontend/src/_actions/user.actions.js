@@ -68,6 +68,7 @@ function getUserProfile() {
                 },
                 error => {
                     dispatch(failure(error))
+                    console.log(error)
                 }
             );
     };

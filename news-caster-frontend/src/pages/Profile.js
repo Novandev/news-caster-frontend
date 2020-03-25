@@ -1,6 +1,7 @@
-import React,{Component} from 'react'
+import React,{Component, Suspense, lazy } from 'react'
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
+
 
 
 
@@ -12,7 +13,6 @@ class Profile extends Component {
 
 
     this.state = {
-        userProfile:this.props.userProfile
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,30 +28,25 @@ handleChange(e) {
 handleSubmit(e) {
     e.preventDefault();
 
-    this.setState({ submitted: true });
-    const { email, password } = this.state;
-    const { dispatch } = this.props;
-    if (email && password) {
-        dispatch(userActions.login(email, password));
-    }
 }
 
 render() {
-    console.log(this.state.userProfile)
-
+  const Profile = React.lazy(() => import('../components/Profile/UserProfile'));
+    // const Practices = React.lazy(() => import('../components/Practices/AllPractices'));
     return (
        <div>
            <h2>Profile</h2>
+           <Suspense fallback={<div>Loading...</div>}>
+           <Profile />
+           </Suspense>
+           
        </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { userProfile } = state.authentication;
-  return {
-      userProfile
-  };
+  
 }
 
-export default connect(mapStateToProps)(Profile);
+export default Profile;
