@@ -55,9 +55,12 @@ class Header extends Component{
     }
 
     componentDidMount(){
-        this.setState({
-            user:JSON.parse(localStorage.getItem('user'))['username']
-        })
+        if(JSON.parse(localStorage.getItem('user'))){
+            this.setState({
+                user:JSON.parse(localStorage.getItem('user'))['username']
+            })
+        }
+        
     }
     // console.log(authTokens)
     render(){

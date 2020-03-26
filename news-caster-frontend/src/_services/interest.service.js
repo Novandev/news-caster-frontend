@@ -60,7 +60,7 @@ function postNewInterest(category,rank) {
         "Authorization": tokenString
     }
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-    return axios.post('http://127.0.0.1:8080/api/v1.0/interests',data,{headers})
+    return axios.post('http://127.0.0.1:8080/api/v1.0/interests/',data,{headers})
         .then(result => {
 
             let interest = result.data;
