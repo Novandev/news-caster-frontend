@@ -43,7 +43,7 @@ class Header extends Component{
     super(props);
 
     this.state = {
-        user:this.props.user
+        user:"",
     };
     this.logOut = this.logOut.bind(this)
 
@@ -54,8 +54,10 @@ class Header extends Component{
 
     }
 
-    componentDidUpdate(){
-        console.log(this.state.user)
+    componentDidMount(){
+        this.setState({
+            user:JSON.parse(localStorage.getItem('user'))['username']
+        })
     }
     // console.log(authTokens)
     render(){
@@ -77,7 +79,9 @@ class Header extends Component{
                             </NavLink>
                         </NavLoginLogout>
                     }
-                    
+                    <NavLink to="/profile">
+                        <p>{user}</p>
+                    </NavLink>
                     <NavLink onClick={()=>this.logOut()}>
                         <p>Logout</p>
                     </NavLink>

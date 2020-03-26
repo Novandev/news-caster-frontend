@@ -44,6 +44,11 @@ function getOneInterest(id) {
                 },
                 error => {
                     dispatch(failure(error))
+                    /* Ill do better error handling later but the only reason you should get a null value back
+                    is that either the server is down(you shouldnt get that far)
+                    or its not your post
+                    */ 
+                    window.location = '/unauthorized'
                 }
             );
     };
@@ -90,6 +95,7 @@ function editOneInterest(title,description,interest_type,url_link,tagList,intere
                 },
                 error => {
                     dispatch(failure(error))
+                    window.location = '/unauthorized';
                 }
             );
     };
@@ -113,7 +119,7 @@ function getOneEditInterest(id) {
                 },
                 error => {
                     dispatch(failure(error))
-                    window.location ='/interests'
+                    window.location = '/unauthorized';
                 }
             );
     };

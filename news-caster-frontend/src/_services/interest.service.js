@@ -18,11 +18,11 @@ function getAllInterests() {
         "Authorization": tokenString
     }
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-    return axios.get("http://127.0.0.1:8000/api/v1/interests",{headers})
+    return axios.get("http://127.0.0.1:8080/api/v1.0/interests/",{headers})
         .then(result => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             let interests = result.data;
-            // localStorage.setItem('user', JSON.stringify(user));
+
             return interests;
         });
 }
@@ -37,7 +37,7 @@ function getOneInterest(id) {
         "Authorization": tokenString
     }
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-    return axios.get(`http://127.0.0.1:8000/api/v1/interests/${id}`,{headers})
+    return axios.get(`http://127.0.0.1:8080/api/v1.0/interests/${id}`,{headers})
         .then(result => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             let interest = result.data;
@@ -60,7 +60,7 @@ function postNewInterest(category,rank) {
         "Authorization": tokenString
     }
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-    return axios.post('http://127.0.0.1:8000/api/v1/interests',data,{headers})
+    return axios.post('http://127.0.0.1:8080/api/v1.0/interests',data,{headers})
         .then(result => {
 
             let interest = result.data;
@@ -78,7 +78,7 @@ function getOneEditInterest(id) {
         "Authorization": tokenString
     }
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-    return axios.get(`http://127.0.0.1:8000/api/v1/interests/${id}`,{headers})
+    return axios.get(`http://127.0.0.1:8080/api/v1.0/interests/${id}`,{headers})
         .then(result => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             let interest = result.data;
@@ -104,7 +104,7 @@ function editOneInterest(category,rank,interestId) {
         "Authorization": tokenString
     }
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-    return axios.put(`http://127.0.0.1:8000/api/v1/interests/${interestId}`,data,{headers})
+    return axios.put(`http://127.0.0.1:8080/api/v1.0/interests/${interestId}`,data,{headers})
         .then(result => {
 
             let interest = result.data;
